@@ -235,7 +235,7 @@ handle_netroot()
                      $NULL"
             $CMD $__op
             if [ "$netif" != "timeout" ]; then
-                $CMD --login
+                $CMD -W --login
             fi
             found=yes
             break
@@ -243,7 +243,7 @@ handle_netroot()
     done
 
     if [ "$netif" = "timeout" ]; then
-        iscsiadm -m node -L onboot || :
+        iscsiadm -m node -L onboot -W || :
     elif [ "$found" != yes ]; then
         warn "iSCSI target \"$iscsi_target_name\" not found on portal $iscsi_target_ip:$iscsi_target_port"
         return 1
